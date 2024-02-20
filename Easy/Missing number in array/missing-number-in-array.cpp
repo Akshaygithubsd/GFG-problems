@@ -13,13 +13,16 @@ using namespace std;
 class Solution{
   public:
     int missingNumber(vector<int>& arr, int n) {
+       unordered_set<int>s(arr.begin(),arr.end());
+       int i=1;
+       int res=-1;
+       while(i<=n){
+           if(s.find(i)==s.end()){
+               res=i;
+               break;
+       }i++;
+    }return res;
         
-        sort(arr.begin(),arr.end());
-        
-        for(int i=0;i<n;i++){
-            if(arr[i]!=i+1)
-                return i+1;
-        }
     }
 };
 
