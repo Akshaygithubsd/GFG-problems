@@ -1,49 +1,44 @@
 //{ Driver Code Starts
-//Initial template for C++
-
 #include <bits/stdc++.h>
 using namespace std;
 
 
 // } Driver Code Ends
-//User function template for C++
-
-class Solution
-{
-  public:
-    //Function to find the minimum indexed character.
-    int minIndexChar(string str, string patt)
-    {
-        // Your code here
-        unordered_set<char>s;
-        int c=-1;
-        for(int i=0;i<patt.length();i++){
-           s.insert(patt[i]);
-        }
-        for(int i=0;i<str.length();i++){
-             if(s.find(str[i])!=s.end()){
-                c=i;break;
-            }
-        }return c;
-    }
+class Solution{
+    public:
+	string printMinIndexChar(string s, string patt)
+	{
+	    // Code here
+	    string res="";
+	    int i=0;
+	    for(int j=0;j<patt.length();j++){
+	        if(s[i]==patt[j]){
+	            res+=s[i];break;
+	        }else if(j==patt.length()-1 && i<s.length()){
+	            j=-1;i++;
+	        }
+	    }if(res==""){
+	        return "$";
+	    }
+	    return res;
+	}
 };
 
 //{ Driver Code Starts.
-
-int main()
-{
-	int t;
+int main() {
+    int t;
     cin>>t;
+    
     while(t--)
     {
         string str;
-        string patt;
         cin>>str;
-        cin>>patt;
+        string patt;
+        cin >> patt;
         Solution obj;
-        cout<<obj.minIndexChar(str, patt)<<endl;
+        cout<<obj.printMinIndexChar(str, patt)<<endl;
     }
+    
 	return 0;
 }
-
 // } Driver Code Ends
