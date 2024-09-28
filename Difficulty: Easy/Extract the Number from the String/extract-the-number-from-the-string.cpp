@@ -10,27 +10,63 @@ using namespace std;
 
 class Solution {
   public:
+  
+   bool isContainNine(long long n){
+       
+       bool ans=false;
+       
+       while(n){
+           int rem=n%10;
+           if(rem==9){
+               ans=true;
+           }
+           n=n/10;
+       }
+       
+       return ans;
+   }
+  
+  
+  
     long long ExtractNumber(string sentence) {
 
-    istringstream iss(sentence);
-    string word;
-    long long largest = -1;
-    
-    while (iss >> word) {
-        bool isNumber = true;
-        for (char ch : word) {
-            if (!isdigit(ch)) {
-                isNumber = false;
-                break;
-            }
-        }
-        
-        if (isNumber && word.find('9') == string::npos) {
-            largest = max(largest, stoll(word));
-        }
+bool isFoundNumber = false;
+std::set<long long> numbers;
+std::string temp;
+
+for (int i = 0; i < sentence.length(); i++) {
+
+    if (isdigit(sentence[i])) {
+        isFoundNumber = true;
+        temp.push_back(sentence[i]);  // Collect digits in the temp string
     }
+
+    // When a space is found after a number, add it to the set
+    if (isFoundNumber && sentence[i] == ' ') {
+        if (!temp.empty()) {  // Ensure temp is not empty before converting
+            numbers.insert(stoll(temp));
+            temp = "";  // Reset the temp string for the next number
+        }
+        isFoundNumber = false;  // Reset the flag after inserting the number
+    }
+}
+
+// Insert the last number if there is one after the loop ends
+if (!temp.empty()) {
+    numbers.insert(stoll(temp));
+}
+
+ long long maxNumber=-1;
+
+  for (long long element : numbers) {
+       if(!isContainNine(element)){
+           maxNumber=max(maxNumber,element);
+       }
+    }
+
+
+return maxNumber;
     
-    return largest;
 }
 };
 
