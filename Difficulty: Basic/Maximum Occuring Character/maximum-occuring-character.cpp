@@ -9,21 +9,21 @@ using namespace std;
 class Solution
 {
     public:
-    //Function to find the maximum occurring character in a string.
+   
     char getMaxOccuringChar(string str)
     {
-      unordered_map<char, int> frequency;
-    int maxCount = 0;
-    char maxChar = 'z' + 1;
-        frequency[ch]++;
-        if (frequency[ch] > maxCount || 
-           (frequency[ch] == maxCount && ch < maxChar)) {
-            maxCount = frequency[ch];
-            maxChar = ch;
-        }
-    }
-
-    return maxChar;
+      unordered_map<char,int>m;
+      char ch='z'+1;
+      char res;
+      int maxfreq=0;
+      for(int i=0;i<str.length();i++){
+          m[str[i]]++;
+          if(m[str[i]]>maxfreq || (m[str[i]]==maxfreq && str[i]<ch)){
+              ch=str[i];
+              res=str[i];
+              maxfreq=m[str[i]];
+          }
+      }return ch;
 }
 };
 
