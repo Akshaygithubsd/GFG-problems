@@ -10,31 +10,27 @@ using namespace std;
 
 class Solution {
   public:
-  long long ExtractNumber(string sentence) {
-    long long res = -1;  // Initialize result to -1
-    string num = "";     // To accumulate current number as a string
-    bool containsNine = false;  // Flag to check if number contains '9'
+    long long ExtractNumber(string sentence) {
 
-    for (int i = 0; i < sentence.length(); i++) {
-        if (isdigit(sentence[i])) {
-            if (sentence[i] == '9') {
-                containsNine = true;  // Mark that this number contains '9'
+    istringstream iss(sentence);
+    string word;
+    long long largest = -1;
+    
+    while (iss >> word) {
+        bool isNumber = true;
+        for (char ch : word) {
+            if (!isdigit(ch)) {
+                isNumber = false;
+                break;
             }
-            num += sentence[i];  // Accumulate digits of the number
-        } else {
-            if (!num.empty() && !containsNine) {  // Check if num is valid (doesn't contain '9')
-                res = max(res, stoll(num));  // Update the result with the largest valid number
-            }
-            num = ""; 
-            containsNine = false; 
+        }
+        
+        if (isNumber && word.find('9') == string::npos) {
+            largest = max(largest, stoll(word));
         }
     }
-
-    if (!num.empty() && !containsNine) {  // Handle the last number after the loop
-        res = max(res, stoll(num));
-    }
-
-    return res;  // Return the largest valid number, or -1 if no valid number is found
+    
+    return largest;
 }
 };
 
