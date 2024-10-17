@@ -9,22 +9,26 @@ using namespace std;
 class Solution
 {
     public:
-   
+    //Function to find the maximum occurring character in a string.
     char getMaxOccuringChar(string str)
     {
-      unordered_map<char,int>m;
-      char ch='z'+1;
-      char res;
-      int maxfreq=0;
-      for(int i=0;i<str.length();i++){
-          m[str[i]]++;
-          if(m[str[i]]>maxfreq || (m[str[i]]==maxfreq && str[i]<ch)){
-              ch=str[i];
-              res=str[i];
-              maxfreq=m[str[i]];
-          }
-      }return ch;
-}
+        // Your code here
+        unordered_map<char,int>m;
+        for(int i=0;i<str.length();i++){
+            m[str[i]]++;
+        }
+        int max=0;
+        char res;
+        for(auto x:m){
+            if(x.second>max){
+                max=x.second;
+                res=x.first;
+            }else if(x.second==max && x.first<res){
+                res=x.first;
+            }
+        }return res;
+    }
+
 };
 
 //{ Driver Code Starts.
