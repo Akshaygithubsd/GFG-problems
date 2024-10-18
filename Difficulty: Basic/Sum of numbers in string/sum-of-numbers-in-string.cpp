@@ -13,25 +13,27 @@ class Solution
     public:
     //Function to calculate sum of all numbers present in a string.
     int findSum(string str)
-    {	int c=0;
-    int sum=0;
-    	bool p=false;
-    	for(char ch:str){
-    	    if(isdigit(ch)){
-    	        c=c*10+ (ch-'0');
-    	        p=true;
-    	    }else{
-    	        if(p){
-    	        sum+=c;
-    	        c=0;
-    	        p=false;
-    	        }
+    {
+    	
+    	// Your code here
+    	int res=0;
+    	int sum=0;
+    	for(int i=0;i<str.length();i++){
+    	   if(isdigit(str[i])){
+    	       
+    	    while(isdigit(str[i]) && i<str.length()){
+    	       
+    	       res=res*10+(str[i]-'0');
+    	       i++;
     	    }
-    	}
-    	if(p){
-    	    sum+=c;
-    	}
-    	    return sum;
+    	    
+    	
+    	        sum+=res;
+    	        res=0;
+    	        i--;}
+    	    
+    	}sum+=res;
+    	return sum;
     	
     }
 };
